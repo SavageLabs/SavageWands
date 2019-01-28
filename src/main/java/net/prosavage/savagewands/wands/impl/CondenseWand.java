@@ -42,6 +42,7 @@ public class CondenseWand extends Wand {
               .name(SavageWands.getInstance().getConfig().getString("wands.condense.item.name"))
               .lore(Util.colorWithPlaceholders(SavageWands.getInstance().getConfig().getStringList("wands.condense.item.lore")
                       , new Placeholder("{uses}", uses + "")))
+              .glowing(SavageWands.getInstance().getConfig().getBoolean("wands.sell.item.glowing"))
               .build();
    }
 

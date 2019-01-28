@@ -47,6 +47,7 @@ public class SellWand extends Wand {
               .lore(Util.colorWithPlaceholders(SavageWands.getInstance().getConfig().getStringList("wands.sell.item.lore")
                       , new Placeholder("{uses}", uses + "")
                       , new Placeholder("{multiplier}", SavageWands.getInstance().getConfig().getDouble("wands.sell.tiers." + tier) + "x")))
+              .glowing(SavageWands.getInstance().getConfig().getBoolean("wands.sell.item.glowing"))
               .build();
    }
 

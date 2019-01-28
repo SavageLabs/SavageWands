@@ -12,6 +12,7 @@ wands:
       3: 1.5
     item:
       name: '&eSellWand'
+      glowing: true
       lore:
         - '&eMultiplier: {multiplier}'
         - '&eUses: {uses}'
@@ -19,6 +20,7 @@ wands:
     uses: 100
     item:
       name: '&eCraftWand'
+      glowing: true
       lore:
         - '&eUses: {uses}'
 
