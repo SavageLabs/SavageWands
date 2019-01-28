@@ -27,21 +27,30 @@ public class CondenseWand extends Wand {
       this.chest = chest;
    }
 
-   public static ItemStack buildItem(Integer uses) {
+   public static ItemStack buildItem(Integer uses, boolean infinite) {
       ItemStack itemStack = Wand.buildItem();
       NBTItem nbtItem = new NBTItem(itemStack);
       nbtItem.setBoolean("Condense", true);
-      if (uses == null) {
-         uses = SavageWands.getInstance().getConfig().getInt("wands.condense.uses");
-         nbtItem.setInteger("Uses", uses);
+      if (infinite) {
+         nbtItem.setInteger("Uses", Integer.MAX_VALUE);
       } else {
-         nbtItem.setInteger("Uses", uses);
+         if (uses == null) {
+            uses = SavageWands.getInstance().getConfig().getInt("wands.condense.uses");
+            nbtItem.setInteger("Uses", uses);
+         } else {
+            nbtItem.setInteger("Uses", uses);
+         }
       }
+      Placeholder usesPlaceholder = new Placeholder("{uses}", uses + "");
+      if (infinite) {
+         usesPlaceholder = new Placeholder("{uses}", "Infinite");
+      }
+
       itemStack = nbtItem.getItem();
       return new ItemBuilder(itemStack)
               .name(SavageWands.getInstance().getConfig().getString("wands.condense.item.name"))
               .lore(Util.colorWithPlaceholders(SavageWands.getInstance().getConfig().getStringList("wands.condense.item.lore")
-                      , new Placeholder("{uses}", uses + "")))
+                      , usesPlaceholder))
               .glowing(SavageWands.getInstance().getConfig().getBoolean("wands.sell.item.glowing"))
               .build();
    }
@@ -108,7 +117,7 @@ public class CondenseWand extends Wand {
          }
          inventory.setContents(itemStacks.toArray(new ItemStack[itemStacks.size()]));
          chest.update();
-         updateWand();
+         super.updateWand();
          if (wandUsed) {
             player.sendMessage(Util.color(SavageWands.getInstance().getConfig().getString("messages.crafted-items")));
          }

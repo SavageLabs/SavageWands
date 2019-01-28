@@ -24,11 +24,13 @@ public class SellWand extends Wand {
       this.chest = chest;
    }
 
-   public static ItemStack buildItem(Integer uses, Integer tier) {
+   public static ItemStack buildItem(Integer uses, Integer tier, boolean infinite) {
       ItemStack itemStack = Wand.buildItem();
       NBTItem nbtItem = new NBTItem(itemStack);
       nbtItem.setBoolean("Sell", true);
-      if (uses == null) {
+      if (infinite) {
+         nbtItem.setInteger("Uses", Integer.MAX_VALUE);
+      } else if (uses == null) {
          uses = SavageWands.getInstance().getConfig().getInt("wands.sell.uses");
          nbtItem.setInteger("Uses", uses);
 
@@ -41,11 +43,15 @@ public class SellWand extends Wand {
       } else {
          nbtItem.setInteger("Tier", tier);
       }
+      Placeholder usesPlaceholder = new Placeholder("{uses}", uses + "");
+      if (infinite) {
+         usesPlaceholder = new Placeholder("{uses}", "Infinite");
+      }
       itemStack = nbtItem.getItem();
       return new ItemBuilder(itemStack)
               .name(SavageWands.getInstance().getConfig().getString("wands.sell.item.name"))
               .lore(Util.colorWithPlaceholders(SavageWands.getInstance().getConfig().getStringList("wands.sell.item.lore")
-                      , new Placeholder("{uses}", uses + "")
+                      , usesPlaceholder
                       , new Placeholder("{multiplier}", SavageWands.getInstance().getConfig().getDouble("wands.sell.tiers." + tier) + "x")))
               .glowing(SavageWands.getInstance().getConfig().getBoolean("wands.sell.item.glowing"))
               .build();
@@ -101,8 +107,7 @@ public class SellWand extends Wand {
          if (wandUsed) {
             SavageWands.deposit(player, itemsSold, moneyEarned, multiplier);
          }
-         updateWand();
-
+         super.updateWand();
       });
    }
 

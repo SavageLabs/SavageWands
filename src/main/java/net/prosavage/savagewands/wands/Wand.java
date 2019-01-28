@@ -37,25 +37,32 @@ public abstract class Wand {
       return nbtItem.hasKey("Wand");
    }
 
-   public void useDurability() {
+   private void useDurability() {
+      Placeholder usesLeftPlaceholder;
       NBTItem nbtItem = new NBTItem(wandItemStack);
-      nbtItem.setInteger("Uses", nbtItem.getInteger("Uses") - 1);
-      if (nbtItem.getInteger("Uses") <= 0) {
-         wandItemStack = new ItemStack(Material.AIR);
-         return;
+      if (nbtItem.getInteger("Uses") != Integer.MAX_VALUE) {
+         nbtItem.setInteger("Uses", nbtItem.getInteger("Uses") - 1);
+         if (nbtItem.getInteger("Uses") <= 0) {
+            wandItemStack = new ItemStack(Material.AIR);
+            return;
+         } else {
+            wandItemStack = nbtItem.getItem();
+         }
+         int usesLeft = new NBTItem(wandItemStack).getInteger("Uses");
+         usesLeftPlaceholder = new Placeholder(((usesLeft + 1) + ""), usesLeft + "");
       } else {
-         wandItemStack = nbtItem.getItem();
+         usesLeftPlaceholder = new Placeholder("{uses}", "Infinite");
       }
-      int usesLeft = new NBTItem(wandItemStack).getInteger("Uses");
+
       List<String> lore = wandItemStack.getItemMeta().getLore();
-      this.wandItemStack = new ItemBuilder(wandItemStack).lore(Util.colorWithPlaceholders(lore, new Placeholder(((usesLeft + 1) + ""), usesLeft + ""))).build();
+      this.wandItemStack = new ItemBuilder(wandItemStack).lore(Util.colorWithPlaceholders(lore, usesLeftPlaceholder)).build();
    }
 
    public void takeWand() {
       player.setItemInHand(new ItemStack(Material.AIR));
    }
 
-   public void updateWand() {
+   protected void updateWand() {
       if (wandUsed) {
          useDurability();
       } else {

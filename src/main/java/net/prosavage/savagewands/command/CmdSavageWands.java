@@ -33,23 +33,30 @@ public class CmdSavageWands implements CommandExecutor {
          }
          if (args.length == 3) {
             if (args[2].toLowerCase().equalsIgnoreCase("sellwand")) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(SellWand.buildItem(null, null));
+               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(SellWand.buildItem(null, null, false));
                return true;
             } else if ((args[2].toLowerCase().equalsIgnoreCase("craftwand")
                     || (args[2].toLowerCase().equalsIgnoreCase("condensewand")))) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(CondenseWand.buildItem(null));
+               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(CondenseWand.buildItem(null, false));
                return true;
             }
          }
 
          if (args.length > 3) {
             Integer uses, tier;
-            if (!isNumber(args[3])) {
-               sender.sendMessage(Util.color("The uses argument has to be an integer."));
-               uses = null;
+            boolean infinite = false;
+            if (!(args[3].equalsIgnoreCase("infinite") || args[3].equalsIgnoreCase("infinity"))) {
+               if (!isNumber(args[3])) {
+                  sender.sendMessage(Util.color("The uses argument has to be an integer."));
+                  uses = null;
+               } else {
+                  uses = Integer.parseInt(args[3]);
+               }
             } else {
-               uses = Integer.parseInt(args[3]);
+               uses = null;
+               infinite = true;
             }
+
             if (args.length != 4) {
                if (!isNumber(args[4])) {
                   sender.sendMessage(Util.color("The tier argument has to be an integer."));
@@ -62,11 +69,11 @@ public class CmdSavageWands implements CommandExecutor {
             }
 
             if (args[2].toLowerCase().equalsIgnoreCase("sellwand")) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(SellWand.buildItem(uses, tier));
+               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(SellWand.buildItem(uses, tier, infinite));
                return true;
             } else if ((args[2].toLowerCase().equalsIgnoreCase("craftwand")
                     || (args[2].toLowerCase().equalsIgnoreCase("condensewand")))) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(CondenseWand.buildItem(uses));
+               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(CondenseWand.buildItem(uses, infinite));
                return true;
             }
          }
@@ -81,6 +88,7 @@ public class CmdSavageWands implements CommandExecutor {
       sender.sendMessage(Util.color("&7(&c&l!&7) &cSavageWands By ProSavage."));
       sender.sendMessage(Util.color(" &c&l• &7Wand Types: SellWand, Craftwand (CondenseWand)."));
       sender.sendMessage(Util.color(" &c&l• &7Arguments with Square Brackets > '[%arg%]' around them are optional."));
+      sender.sendMessage(Util.color(" &c&l• &7The %uses% argument can also take the &cinfinite&7 keyword to create an indestructible wand."));
       sender.sendMessage(Util.color(" &c&l• &7/sw give %player% %wand% [%uses%] [%tier%]"));
    }
 
