@@ -1,0 +1,11 @@
+name: SavageWands
+version: ${project.version}
+main: net.prosavage.savagewands.SavageWands
+api-version: 1.13
+prefix: SavageWands
+authors: [ProSavage]
+softdepend: [ASkyBlock, Factions]
+description: Sellwands, Condense Wands.
+commands:
+  savagewands:
+    aliases: [swand, swands, savagewand, wand, wands, sw]

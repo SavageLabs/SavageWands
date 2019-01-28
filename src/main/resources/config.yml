@@ -1,0 +1,62 @@
+# SavageWands, Made with <3
+# By ProSavage
+
+
+
+wands:
+  sell:
+    uses: 100
+    tiers:
+      1: 1.0
+      2: 1.25
+      3: 1.5
+    item:
+      name: '&eSellWand'
+      lore:
+        - '&eTier: {tier}'
+        - '&eUses: {uses}'
+  condense:
+    uses: 100
+    item:
+      name: '&eCraftWand'
+      lore:
+        - '&eUses: {uses}'
+
+# Make sure to use 1.13 material names, as the plugin
+# will convert the names to legacy (1.12 or lower) names automatically.
+materials:
+  IRON_INGOT: 20.0
+  GOLD_INGOT: 50.0
+  DIAMOND: 100.0
+  EMERALD: 101.0
+
+
+# Craft Wands
+craft:
+  IRON_INGOT:
+    amount: 9
+    result: IRON_BLOCK
+  GOLD_INGOT:
+    amount: 9
+    result: GOLD_BLOCK
+  COAL:
+    amount: 9
+    result: COAL_BLOCK
+  DIAMOND:
+    amount: 9
+    result: DIAMOND_BLOCK
+
+
+
+
+
+
+messages:
+  cant-use-here: '&cYou cannot use this here'
+  deposit-money: '&cYou have sold {items} items for ${amount} with a multiplier of {multiplier}'
+  chest-empty: '&cChest is empty!'
+  wand-not-used: '&cWand not used, nothing happened'
+  crafted-items: '&cCrafted all items in chest'
+  cannot-use-here: '&cYou cannot use wands on that block!'
+
+
