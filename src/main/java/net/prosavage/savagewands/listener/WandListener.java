@@ -38,7 +38,8 @@ public class WandListener implements Listener {
       Player player = event.getPlayer();
       ItemStack eventItem = event.getItem();
       Chest chest = (Chest) event.getClickedBlock().getState();
-      if (!((ASkyBlockHook) HookManager.getPluginMap().get("ASkyBlock")).canDoAction(event.getClickedBlock().getLocation(), event.getPlayer())) {
+      ASkyBlockHook hook = (ASkyBlockHook) HookManager.getPluginMap().get("ASkyBlock");
+      if (hook != null && !hook.canDoAction(event.getClickedBlock().getLocation(), event.getPlayer())) {
          player.sendMessage(Util.color(SavageWands.getInstance().getConfig().getString("messages.cannot-use-here")));
          return;
       }
