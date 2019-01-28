@@ -13,7 +13,7 @@ wands:
     item:
       name: '&eSellWand'
       lore:
-        - '&eTier: {tier}'
+        - '&eMultiplier: {multiplier}'
         - '&eUses: {uses}'
   condense:
     uses: 100
