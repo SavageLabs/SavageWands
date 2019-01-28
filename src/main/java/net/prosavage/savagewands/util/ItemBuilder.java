@@ -5,6 +5,8 @@ package net.prosavage.savagewands.util;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -52,6 +54,17 @@ public class ItemBuilder {
 
    public ItemBuilder lore(List<String> lore) {
       meta.setLore(Util.color(lore));
+      return this;
+   }
+
+   public ItemBuilder glowing(boolean status) {
+      if (status) {
+         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+         meta.addEnchant(Enchantment.DURABILITY, 1, true);
+      } else {
+         meta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+         meta.removeEnchant(Enchantment.DURABILITY);
+      }
       return this;
    }
 
