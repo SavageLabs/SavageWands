@@ -69,13 +69,16 @@ public class CmdSavageWands implements CommandExecutor {
                tier = null;
             }
 
-            if (args[2].toLowerCase().equalsIgnoreCase("sellwand")) {
+            if (args[2].toLowerCase().equalsIgnoreCase("sellwand")
+                    || args[2].toLowerCase().equalsIgnoreCase("sell")) {
 					Player target = SavageWands.getInstance().getServer().getPlayerExact(args[1]);
 					target.getInventory().addItem(SellWand.buildItem(uses, tier, infinite));
 					inform(sender, target, "SellWand");
                return true;
             } else if ((args[2].toLowerCase().equalsIgnoreCase("craftwand")
-                    || (args[2].toLowerCase().equalsIgnoreCase("condensewand")))) {
+                    || (args[2].toLowerCase().equalsIgnoreCase("condensewand")
+                    || args[2].toLowerCase().equalsIgnoreCase("craft")
+                    || args[2].toLowerCase().equalsIgnoreCase("condense")))) {
 					Player target = SavageWands.getInstance().getServer().getPlayerExact(args[1]);
 					target.getInventory().addItem(CondenseWand.buildItem(uses, infinite));
 					inform(sender, target, "CraftWand");
