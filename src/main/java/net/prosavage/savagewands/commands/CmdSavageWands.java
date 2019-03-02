@@ -1,4 +1,4 @@
-package net.prosavage.savagewands.command;
+package net.prosavage.savagewands.commands;
 
 import net.prosavage.savagewands.SavageWands;
 import net.prosavage.savagewands.util.Util;

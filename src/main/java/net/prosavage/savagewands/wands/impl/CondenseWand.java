@@ -61,10 +61,7 @@ public class CondenseWand extends Wand {
          return false;
       }
       NBTItem nbtItem = new NBTItem(itemStack);
-      if (nbtItem.hasKey("Condense")) {
-         return true;
-      }
-      return false;
+      return nbtItem.hasKey("Condense");
    }
 
 

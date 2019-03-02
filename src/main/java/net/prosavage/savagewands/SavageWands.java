@@ -1,7 +1,7 @@
 package net.prosavage.savagewands;
 
 import net.milkbowl.vault.economy.Economy;
-import net.prosavage.savagewands.command.CmdSavageWands;
+import net.prosavage.savagewands.commands.CmdSavageWands;
 import net.prosavage.savagewands.hooks.HookManager;
 import net.prosavage.savagewands.hooks.impl.ASkyBlockHook;
 import net.prosavage.savagewands.hooks.impl.FactionHook;
@@ -10,19 +10,15 @@ import net.prosavage.savagewands.hooks.impl.WorldGuardHook;
 import net.prosavage.savagewands.listener.WandListener;
 import net.prosavage.savagewands.util.CraftKey;
 import net.prosavage.savagewands.util.Util;
-
 import net.prosavage.savagewands.util.nbt.MultiversionMaterials;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Logger;
 
 public final class SavageWands extends JavaPlugin {

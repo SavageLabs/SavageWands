@@ -2,14 +2,12 @@ package net.prosavage.savagewands.hooks.impl;
 
 
 import net.prosavage.savagewands.SavageWands;
-import net.prosavage.savagewands.exception.NotImplementedException;
+import net.prosavage.savagewands.exceptions.NotImplementedException;
 import net.prosavage.savagewands.hooks.PluginHook;
 import net.prosavage.savagewands.hooks.impl.factions.FactionMCHook;
 import net.prosavage.savagewands.hooks.impl.factions.FactionUUIDHook;
-
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-
 
 import java.util.List;
 

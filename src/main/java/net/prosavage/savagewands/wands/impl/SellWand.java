@@ -63,10 +63,7 @@ public class SellWand extends Wand {
          return false;
       }
       NBTItem nbtItem = new NBTItem(itemStack);
-      if (nbtItem.hasKey("Sell")) {
-         return true;
-      }
-      return false;
+      return nbtItem.hasKey("Sell");
    }
 
    protected int getTier() {
