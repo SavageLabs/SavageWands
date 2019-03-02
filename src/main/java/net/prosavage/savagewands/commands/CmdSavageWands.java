@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CmdSavageWands implements CommandExecutor {
 
@@ -69,11 +70,15 @@ public class CmdSavageWands implements CommandExecutor {
             }
 
             if (args[2].toLowerCase().equalsIgnoreCase("sellwand")) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(SellWand.buildItem(uses, tier, infinite));
+					Player target = SavageWands.getInstance().getServer().getPlayerExact(args[1]);
+					target.getInventory().addItem(SellWand.buildItem(uses, tier, infinite));
+					inform(sender, target, "SellWand");
                return true;
             } else if ((args[2].toLowerCase().equalsIgnoreCase("craftwand")
                     || (args[2].toLowerCase().equalsIgnoreCase("condensewand")))) {
-               SavageWands.getInstance().getServer().getPlayerExact(args[1]).getInventory().addItem(CondenseWand.buildItem(uses, infinite));
+					Player target = SavageWands.getInstance().getServer().getPlayerExact(args[1]);
+					target.getInventory().addItem(CondenseWand.buildItem(uses, infinite));
+					inform(sender, target, "CraftWand");
                return true;
             }
          }
@@ -91,6 +96,13 @@ public class CmdSavageWands implements CommandExecutor {
       sender.sendMessage(Util.color(" &c&l• &7The %uses% argument can also take the &cinfinite&7 keyword to create an indestructible wand."));
       sender.sendMessage(Util.color(" &c&l• &7/sw give %player% %wand% [%uses%] [%tier%]"));
    }
+
+	private void inform(CommandSender sender, Player target, String wandType) {
+		sender.sendMessage(Util.color("&7(&c&l!&7) &7You have given &c" + target.getName() + "&7 a &c" + wandType + "&7."));
+		target.sendMessage(Util.color("&7(&c&l!&7) &7You have received a &c" + wandType + "&7."));
+	}
+
+
 
    private boolean isNumber(String number) {
       try {
